@@ -1,0 +1,34 @@
+{
+  "name": "inverted-index-api",
+  "version": "1.0.0",
+  "description": "inverted-index-api application",
+  "main": "./src/inverted-index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "jasmine"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ayodelevm/inverted-index-api.git"
+  },
+  "author": "Ayodele Victor",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ayodelevm/inverted-index-api/issues"
+  },
+  "homepage": "https://github.com/ayodelevm/inverted-index-api#readme",
+  "dependencies": {
+    "dotenv": "^4.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb": "^14.1.0",
+    "eslint-config-airbnb-base": "^11.1.3",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^4.0.0",
+    "eslint-plugin-react": "^6.9.0",
+    "jasmine": "^2.6.0"
+  }
+}
