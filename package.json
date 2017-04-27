@@ -7,7 +7,8 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "jasmine"
+    "test": "jasmine-node",
+    "start": "nodemon app.js"
   },
   "repository": {
     "type": "git",
