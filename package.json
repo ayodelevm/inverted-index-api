@@ -2,7 +2,7 @@
   "name": "inverted-index-api",
   "version": "1.0.0",
   "description": "inverted-index-api application",
-  "main": "./src/inverted-index.js",
+  "main": "app.js",
   "directories": {
     "test": "tests"
   },
@@ -29,6 +29,9 @@
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^6.9.0",
-    "jasmine": "^2.6.0"
+    "gulp": "^3.9.1",
+    "gulp-istanbul-report": "0.0.1",
+    "jasmine": "^2.6.0",
+    "supertest": "^3.0.0"
   }
 }
