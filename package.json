@@ -7,8 +7,10 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "jasmine-node",
-    "start": "nodemon app.js"
+    "pretest": "babel src/*.js --out-dir lib && babel tests/*.js --out-dir lib",
+    "test": "./node_modules/.bin/jasmine-node --verbose --captureExceptions lib",
+    "prepublish": "npm test",
+    "start": "nodemon --exec babel-node ./src/inverted-index.js"
   },
   "repository": {
     "type": "git",
@@ -21,9 +23,15 @@
   },
   "homepage": "https://github.com/ayodelevm/inverted-index-api#readme",
   "dependencies": {
-    "dotenv": "^4.0.0"
+    "dotenv": "^4.0.0",
+    "es6-module-loader": "^0.17.11"
   },
   "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-core": "^6.24.1",
+    "babel-loader": "^7.0.0",
+    "babel-preset-latest": "^6.24.1",
+    "babel-register": "^6.24.1",
     "eslint": "^3.19.0",
     "eslint-config-airbnb": "^14.1.0",
     "eslint-config-airbnb-base": "^11.1.3",
@@ -32,7 +40,9 @@
     "eslint-plugin-react": "^6.9.0",
     "gulp": "^3.9.1",
     "gulp-istanbul-report": "0.0.1",
-    "jasmine": "^2.6.0",
-    "supertest": "^3.0.0"
+    "gulp-jasmine-node": "^1.0.7",
+    "jasmine-node": "^1.14.5",
+    "supertest": "^3.0.0",
+    "webpack": "^2.4.1"
   }
 }
