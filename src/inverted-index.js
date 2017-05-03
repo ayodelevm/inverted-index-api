@@ -2,18 +2,16 @@
 import path from 'path';
 import fs from 'fs';
 
-const allfiles = ['book-one.json', 'book-two.json', 'book-three.json'];
-const searchQuery = [["it's first string"], ['to', 'of'], 'reminscence'];
+require('babel-polyfill');
 
+// const path = require('path');
+// const fs = require('fs');
 
-class DataError {
-  constructor(message, data) {
-    this.message = message;
-    this.data = data;
-  }
-}
+// const allfiles = ['book-one.json', 'book-two.json', 'book-three.json'];
+// const searchQuery = [["it's first string"], ['to', 'of'], 'reminscence'];
+// const searchQuery = ['first string', 'around', ['world', 'remincense']];
 
-class InvertedIndex {
+export default class InvertedIndex {
   // Inverted index class attributes goes here
   constructor() {
     this.fileContent = null;
@@ -94,27 +92,26 @@ class InvertedIndex {
   }
 
   validateFileContent(data) {
-    if (this.errors.length === 0) {
-      let hasErrors = false;
-      if (data.length > 0 && data.some(i =>
-        (JSON.stringify(i)[0]) !== '{' && JSON.stringify(i)[JSON.stringify(i).length - 1] !== '}')) {
-        this.errors.push(new DataError('file is not a JSON array', data));
-        hasErrors = true;
-      }
-
-      if (!hasErrors && data.some(i =>
-        JSON.stringify(i) === JSON.stringify({})) && Object.keys(data[0]).length === 0) {
-        this.errors.push(new DataError('JSON object cannot be empty or contain empty objects', data));
-        hasErrors = true;
-      }
-
-      if (!hasErrors && data.some(i =>
-        i.title === undefined || i.text === undefined)) {
-        this.errors.push(new DataError('Bad JSON Array format', data));
-        hasErrors = true;
-      }
-      return !hasErrors;
+    let hasErrors = false;
+    if (data.length > 0 && data.some(i =>
+      (JSON.stringify(i)[0]) !== '{' && JSON.stringify(i)[JSON.stringify(i).length - 1] !== '}')) {
+      this.errors.push(new DataError('file is not a JSON array', data));
+      // throw new Error('file content is not a JSON Array');
+      hasErrors = true;
     }
+
+    if (!hasErrors && data.some(i =>
+      JSON.stringify(i) === JSON.stringify({})) && Object.keys(data[0]).length === 0) {
+      this.errors.push(new DataError('JSON object cannot be empty or contain empty objects', data));
+      hasErrors = true;
+    }
+
+    if (!hasErrors && data.some(i =>
+      i.title === undefined || i.text === undefined)) {
+      this.errors.push(new DataError('Bad JSON Array format', data));
+      hasErrors = true;
+    }
+    return !hasErrors;
   }
 
   static sanitizeData(data) {
@@ -123,15 +120,24 @@ class InvertedIndex {
 
 }
 
-export default 'InvertedIndex';
+class DataError {
+  constructor(message, data) {
+    this.message = message;
+    this.data = data;
+  }
+}
 
+
+// module.export = InvertedIndex;
+
+/*
 const indexOne = new InvertedIndex();
 indexOne.createIndex();
-console.log(indexOne.createdIndex);
+// console.log(indexOne.createdIndex['book-one.json'].understand);
 indexOne.searchIndex();
 console.log(indexOne.searchResult);
 
-for(const error of indexOne.errors) {
+/* for(const error of indexOne.errors) {
   console.log(error.message);
-}
+}*/
 
