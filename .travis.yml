@@ -4,7 +4,7 @@ node_js:
   - "latest"
 
 before_script:
-  - nvm install latest
+  - npm install latest
   - npm install -g gulp
 script: 
   - gulp
