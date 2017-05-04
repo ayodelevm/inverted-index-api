@@ -7,10 +7,10 @@
     "test": "tests"
   },
   "scripts": {
-    "pretest": "babel src/*.js --out-dir lib && babel tests/*.js --out-dir lib",
-    "test": "./node_modules/.bin/jasmine-node --verbose --captureExceptions lib",
-    "prepublish": "npm test",
-    "start": "nodemon --exec babel-node ./src/inverted-index.js"
+    "test": "gulp run-test",
+    "dev": "nodemon --exec babel-node src/inverted-index.js",
+    "prestart": "babel src --out-dir dist",
+    "start": "node dist/inverted-index.js"
   },
   "repository": {
     "type": "git",
