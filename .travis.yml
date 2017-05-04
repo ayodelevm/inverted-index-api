@@ -2,4 +2,11 @@ language: node_js
 node_js:
   - "node"
   - "latest"
-script: npm run coverage
+
+before_script:
+  - nvm install latest
+  - npm install -g gulp
+script: 
+  - gulp
+  - npm install
+  - npm run coverage
