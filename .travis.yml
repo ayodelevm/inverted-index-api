@@ -1,10 +1,11 @@
 language: node_js
 node_js:
   - "node"
+  - "6"
+  - "7"
   - "latest"
 
 before_script:
-  - npm install latest
   - npm install -g gulp
 script: 
   - gulp
