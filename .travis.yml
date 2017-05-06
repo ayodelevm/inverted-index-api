@@ -8,11 +8,5 @@ node_js:
 before_script:
   - npm install -g gulp
 script: 
-<<<<<<< HEAD
-  - gulp
-  - npm install
-=======
   - npm install
   - gulp
->>>>>>> invertedIndexClassFunc
-  - npm run coverage

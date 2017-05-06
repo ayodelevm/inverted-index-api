@@ -17,11 +17,8 @@ var _fs = require('fs');
 
 var _fs2 = _interopRequireDefault(_fs);
 
-<<<<<<< HEAD
-=======
 require('babel-polyfill');
 
->>>>>>> invertedIndexClassFunc
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -30,22 +27,14 @@ function _toArray(arr) { return Array.isArray(arr) ? arr : Array.from(arr); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-<<<<<<< HEAD
-require('babel-polyfill');
-
-=======
->>>>>>> invertedIndexClassFunc
 // const path = require('path');
 // const fs = require('fs');
 
-// const allfiles = ['book-one.json', 'book-two.json', 'book-three.json'];
+var allfiles = ['book-one.json', 'book-two.json', 'book-three.json'];
 // const searchQuery = [["it's first string"], ['to', 'of'], 'reminscence'];
-<<<<<<< HEAD
-=======
-// const searchQuery = [];
-// const filename = ['book-one.json', 'book-three.json'];
->>>>>>> invertedIndexClassFunc
-// const searchQuery = ['first string', 'around', ['world', 'remincense']];
+//const searchQuery = [];
+var filename = ['book-one.json', 'book-three.json'];
+var searchQuery = ['first string', 'around', ['world', 'reminscence']];
 
 var InvertedIndex = function () {
   // Inverted index class attributes goes here
@@ -153,40 +142,127 @@ var InvertedIndex = function () {
       }, readBookData, this, [[3, 23, 27, 35], [9, 15], [28,, 30, 34]]);
     })
   }, {
+    key: 'readBookDataApiMulter',
+    value: regeneratorRuntime.mark(function readBookDataApiMulter(_ref3) {
+      var _ref4 = _toArray(_ref3),
+          requestFileObject = _ref4.slice(0);
+
+      var filenameAndPath, _iteratorNormalCompletion2, _didIteratorError2, _iteratorError2, _iterator2, _step2;
+
+      return regeneratorRuntime.wrap(function readBookDataApiMulter$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              filenameAndPath = [];
+
+              requestFileObject.forEach(function (i) {
+                return filenameAndPath.push(_defineProperty({}, i.originalname, i.path));
+              });
+              _iteratorNormalCompletion2 = true;
+              _didIteratorError2 = false;
+              _iteratorError2 = undefined;
+              _context2.prev = 5;
+              _iterator2 = filenameAndPath[Symbol.iterator]();
+
+            case 7:
+              if (_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done) {
+                _context2.next = 21;
+                break;
+              }
+
+              this.eachFilenameAndPath = _step2.value;
+              _context2.prev = 9;
+
+              this.fileContent = JSON.parse(_fs2.default.readFileSync(this.eachFilenameAndPath.path, 'utf8'));
+              _context2.next = 13;
+              return {
+                filename: this.eachFilenameAndPath.originalname,
+                fileContent: this.fileContent
+              };
+
+            case 13:
+              _context2.next = 18;
+              break;
+
+            case 15:
+              _context2.prev = 15;
+              _context2.t0 = _context2['catch'](9);
+
+              this.errors.push(new DataError('Invalid file', this.filename));
+
+            case 18:
+              _iteratorNormalCompletion2 = true;
+              _context2.next = 7;
+              break;
+
+            case 21:
+              _context2.next = 27;
+              break;
+
+            case 23:
+              _context2.prev = 23;
+              _context2.t1 = _context2['catch'](5);
+              _didIteratorError2 = true;
+              _iteratorError2 = _context2.t1;
+
+            case 27:
+              _context2.prev = 27;
+              _context2.prev = 28;
+
+              if (!_iteratorNormalCompletion2 && _iterator2.return) {
+                _iterator2.return();
+              }
+
+            case 30:
+              _context2.prev = 30;
+
+              if (!_didIteratorError2) {
+                _context2.next = 33;
+                break;
+              }
+
+              throw _iteratorError2;
+
+            case 33:
+              return _context2.finish(30);
+
+            case 34:
+              return _context2.finish(27);
+
+            case 35:
+            case 'end':
+              return _context2.stop();
+          }
+        }
+      }, readBookDataApiMulter, this, [[5, 23, 27, 35], [9, 15], [28,, 30, 34]]);
+    })
+  }, {
     key: 'createIndex',
-    value: function createIndex() {
+    value: function createIndex(fileObject) {
       var _this = this;
 
-      var fileObject = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.readBookData(allfiles);
-
       var mappedIndex = {};
-      var _iteratorNormalCompletion2 = true;
-      var _didIteratorError2 = false;
-      var _iteratorError2 = undefined;
+      var _iteratorNormalCompletion3 = true;
+      var _didIteratorError3 = false;
+      var _iteratorError3 = undefined;
 
       try {
-        for (var _iterator2 = fileObject[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-          this.currentFile = _step2.value;
+        for (var _iterator3 = fileObject[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+          this.currentFile = _step3.value;
 
           if (this.validateFileContent(this.currentFile.fileContent)) {
             (function () {
               var wordsCollection = {};
-              var _iteratorNormalCompletion3 = true;
-              var _didIteratorError3 = false;
-              var _iteratorError3 = undefined;
+              var _iteratorNormalCompletion4 = true;
+              var _didIteratorError4 = false;
+              var _iteratorError4 = undefined;
 
               try {
                 var _loop = function _loop() {
-<<<<<<< HEAD
-                  var _step3$value = _slicedToArray(_step3.value, 2),
-                      index = _step3$value[0],
-                      newObject = _step3$value[1];
-=======
-                  var _ref3 = _step3.value;
-                  _ref4 = _slicedToArray(_ref3, 2);
-                  var index = _ref4[0];
-                  var newObject = _ref4[1];
->>>>>>> invertedIndexClassFunc
+                  var _ref5 = _step4.value;
+                  _ref6 = _slicedToArray(_ref5, 2);
+                  var index = _ref6[0];
+                  var newObject = _ref6[1];
 
                   var titleTextArray = [];
                   titleTextArray = titleTextArray.concat(InvertedIndex.sanitizeData(newObject.title));
@@ -200,25 +276,22 @@ var InvertedIndex = function () {
                   });
                 };
 
-                for (var _iterator3 = _this.currentFile.fileContent.entries()[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
-<<<<<<< HEAD
-=======
-                  var _ref4;
+                for (var _iterator4 = _this.currentFile.fileContent.entries()[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
+                  var _ref6;
 
->>>>>>> invertedIndexClassFunc
                   _loop();
                 }
               } catch (err) {
-                _didIteratorError3 = true;
-                _iteratorError3 = err;
+                _didIteratorError4 = true;
+                _iteratorError4 = err;
               } finally {
                 try {
-                  if (!_iteratorNormalCompletion3 && _iterator3.return) {
-                    _iterator3.return();
+                  if (!_iteratorNormalCompletion4 && _iterator4.return) {
+                    _iterator4.return();
                   }
                 } finally {
-                  if (_didIteratorError3) {
-                    throw _iteratorError3;
+                  if (_didIteratorError4) {
+                    throw _iteratorError4;
                   }
                 }
               }
@@ -229,177 +302,151 @@ var InvertedIndex = function () {
           this.createdIndex = mappedIndex;
         }
       } catch (err) {
-        _didIteratorError2 = true;
-        _iteratorError2 = err;
+        _didIteratorError3 = true;
+        _iteratorError3 = err;
       } finally {
         try {
-          if (!_iteratorNormalCompletion2 && _iterator2.return) {
-            _iterator2.return();
+          if (!_iteratorNormalCompletion3 && _iterator3.return) {
+            _iterator3.return();
           }
         } finally {
-          if (_didIteratorError2) {
-            throw _iteratorError2;
+          if (_didIteratorError3) {
+            throw _iteratorError3;
           }
         }
       }
     }
   }, {
     key: 'takeInSearchQuery',
-<<<<<<< HEAD
-    value: regeneratorRuntime.mark(function takeInSearchQuery(_ref3) {
-      var _ref4 = _toArray(_ref3),
-          allSearchQuery = _ref4.slice(0);
-=======
-    value: regeneratorRuntime.mark(function takeInSearchQuery(_ref5) {
-      var _ref6 = _toArray(_ref5),
-          allSearchQuery = _ref6.slice(0);
->>>>>>> invertedIndexClassFunc
+    value: regeneratorRuntime.mark(function takeInSearchQuery(_ref7) {
+      var _ref8 = _toArray(_ref7),
+          allSearchQuery = _ref8.slice(0);
 
-      var _iteratorNormalCompletion4, _didIteratorError4, _iteratorError4, _iterator4, _step4, query, _iteratorNormalCompletion5, _didIteratorError5, _iteratorError5, _iterator5, _step5, newQuery;
+      var _iteratorNormalCompletion5, _didIteratorError5, _iteratorError5, _iterator5, _step5, query, _iteratorNormalCompletion6, _didIteratorError6, _iteratorError6, _iterator6, _step6, newQuery;
 
-      return regeneratorRuntime.wrap(function takeInSearchQuery$(_context2) {
+      return regeneratorRuntime.wrap(function takeInSearchQuery$(_context3) {
         while (1) {
-          switch (_context2.prev = _context2.next) {
+          switch (_context3.prev = _context3.next) {
             case 0:
               allSearchQuery = allSearchQuery.reduce(function (a, b) {
                 return a.concat(b);
               }, []);
-              _iteratorNormalCompletion4 = true;
-              _didIteratorError4 = false;
-              _iteratorError4 = undefined;
-              _context2.prev = 4;
-              _iterator4 = allSearchQuery[Symbol.iterator]();
-
-            case 6:
-              if (_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done) {
-                _context2.next = 37;
-                break;
-              }
-
-              query = _step4.value;
               _iteratorNormalCompletion5 = true;
               _didIteratorError5 = false;
               _iteratorError5 = undefined;
-              _context2.prev = 11;
-              _iterator5 = InvertedIndex.sanitizeData(query)[Symbol.iterator]();
+              _context3.prev = 4;
+              _iterator5 = allSearchQuery[Symbol.iterator]();
 
-            case 13:
+            case 6:
               if (_iteratorNormalCompletion5 = (_step5 = _iterator5.next()).done) {
-                _context2.next = 20;
+                _context3.next = 37;
                 break;
               }
 
-              newQuery = _step5.value;
-              _context2.next = 17;
+              query = _step5.value;
+              _iteratorNormalCompletion6 = true;
+              _didIteratorError6 = false;
+              _iteratorError6 = undefined;
+              _context3.prev = 11;
+              _iterator6 = InvertedIndex.sanitizeData(query)[Symbol.iterator]();
+
+            case 13:
+              if (_iteratorNormalCompletion6 = (_step6 = _iterator6.next()).done) {
+                _context3.next = 20;
+                break;
+              }
+
+              newQuery = _step6.value;
+              _context3.next = 17;
               return newQuery;
 
             case 17:
-              _iteratorNormalCompletion5 = true;
-              _context2.next = 13;
+              _iteratorNormalCompletion6 = true;
+              _context3.next = 13;
               break;
 
             case 20:
-              _context2.next = 26;
+              _context3.next = 26;
               break;
 
             case 22:
-              _context2.prev = 22;
-              _context2.t0 = _context2['catch'](11);
-              _didIteratorError5 = true;
-              _iteratorError5 = _context2.t0;
+              _context3.prev = 22;
+              _context3.t0 = _context3['catch'](11);
+              _didIteratorError6 = true;
+              _iteratorError6 = _context3.t0;
 
             case 26:
-              _context2.prev = 26;
-              _context2.prev = 27;
+              _context3.prev = 26;
+              _context3.prev = 27;
+
+              if (!_iteratorNormalCompletion6 && _iterator6.return) {
+                _iterator6.return();
+              }
+
+            case 29:
+              _context3.prev = 29;
+
+              if (!_didIteratorError6) {
+                _context3.next = 32;
+                break;
+              }
+
+              throw _iteratorError6;
+
+            case 32:
+              return _context3.finish(29);
+
+            case 33:
+              return _context3.finish(26);
+
+            case 34:
+              _iteratorNormalCompletion5 = true;
+              _context3.next = 6;
+              break;
+
+            case 37:
+              _context3.next = 43;
+              break;
+
+            case 39:
+              _context3.prev = 39;
+              _context3.t1 = _context3['catch'](4);
+              _didIteratorError5 = true;
+              _iteratorError5 = _context3.t1;
+
+            case 43:
+              _context3.prev = 43;
+              _context3.prev = 44;
 
               if (!_iteratorNormalCompletion5 && _iterator5.return) {
                 _iterator5.return();
               }
 
-            case 29:
-              _context2.prev = 29;
+            case 46:
+              _context3.prev = 46;
 
               if (!_didIteratorError5) {
-                _context2.next = 32;
+                _context3.next = 49;
                 break;
               }
 
               throw _iteratorError5;
 
-            case 32:
-              return _context2.finish(29);
-
-            case 33:
-              return _context2.finish(26);
-
-            case 34:
-              _iteratorNormalCompletion4 = true;
-              _context2.next = 6;
-              break;
-
-            case 37:
-              _context2.next = 43;
-              break;
-
-            case 39:
-              _context2.prev = 39;
-              _context2.t1 = _context2['catch'](4);
-              _didIteratorError4 = true;
-              _iteratorError4 = _context2.t1;
-
-            case 43:
-              _context2.prev = 43;
-              _context2.prev = 44;
-
-              if (!_iteratorNormalCompletion4 && _iterator4.return) {
-                _iterator4.return();
-              }
-
-            case 46:
-              _context2.prev = 46;
-
-              if (!_didIteratorError4) {
-                _context2.next = 49;
-                break;
-              }
-
-              throw _iteratorError4;
-
             case 49:
-              return _context2.finish(46);
+              return _context3.finish(46);
 
             case 50:
-              return _context2.finish(43);
+              return _context3.finish(43);
 
             case 51:
             case 'end':
-              return _context2.stop();
+              return _context3.stop();
           }
         }
       }, takeInSearchQuery, this, [[4, 39, 43, 51], [11, 22, 26, 34], [27,, 29, 33], [44,, 46, 50]]);
     })
   }, {
     key: 'searchIndex',
-<<<<<<< HEAD
-    value: function searchIndex() {
-      var _this2 = this;
-
-      var allQuery = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.takeInSearchQuery(searchQuery);
-
-      var queryResult = {};
-      var _iteratorNormalCompletion6 = true;
-      var _didIteratorError6 = false;
-      var _iteratorError6 = undefined;
-
-      try {
-        var _loop2 = function _loop2() {
-          var individualQuery = _step6.value;
-
-          var foundQuery = {};
-          Object.entries(_this2.createdIndex).forEach(function (objectArray) {
-            var _objectArray = _slicedToArray(objectArray, 2),
-                filename = _objectArray[0],
-=======
     value: function searchIndex(index, filename, uniqueSearchQuery) {
       var indexParams = void 0,
           filenameParams = void 0,
@@ -411,48 +458,47 @@ var InvertedIndex = function () {
         uniqueSearchQueryParams = arguments['1'];
       } else {
         indexParams = index;filenameParams = filename;uniqueSearchQueryParams = uniqueSearchQuery;
-        var _iteratorNormalCompletion6 = true;
-        var _didIteratorError6 = false;
-        var _iteratorError6 = undefined;
+        var _iteratorNormalCompletion7 = true;
+        var _didIteratorError7 = false;
+        var _iteratorError7 = undefined;
 
         try {
-          for (var _iterator6 = filenameParams[Symbol.iterator](), _step6; !(_iteratorNormalCompletion6 = (_step6 = _iterator6.next()).done); _iteratorNormalCompletion6 = true) {
-            var eachFilename = _step6.value;
+          for (var _iterator7 = filenameParams[Symbol.iterator](), _step7; !(_iteratorNormalCompletion7 = (_step7 = _iterator7.next()).done); _iteratorNormalCompletion7 = true) {
+            var eachFilename = _step7.value;
 
             if (indexParams.hasOwnProperty(eachFilename)) {
               Object.assign(matchedBookIndex, _defineProperty({}, eachFilename, indexParams[eachFilename]));
             }
           }
         } catch (err) {
-          _didIteratorError6 = true;
-          _iteratorError6 = err;
+          _didIteratorError7 = true;
+          _iteratorError7 = err;
         } finally {
           try {
-            if (!_iteratorNormalCompletion6 && _iterator6.return) {
-              _iterator6.return();
+            if (!_iteratorNormalCompletion7 && _iterator7.return) {
+              _iterator7.return();
             }
           } finally {
-            if (_didIteratorError6) {
-              throw _iteratorError6;
+            if (_didIteratorError7) {
+              throw _iteratorError7;
             }
           }
         }
       }
       var allQuery = this.takeInSearchQuery(uniqueSearchQueryParams);
-      var _iteratorNormalCompletion7 = true;
-      var _didIteratorError7 = false;
-      var _iteratorError7 = undefined;
+      var _iteratorNormalCompletion8 = true;
+      var _didIteratorError8 = false;
+      var _iteratorError8 = undefined;
 
       try {
         var _loop2 = function _loop2() {
-          var individualQuery = _step7.value;
+          var individualQuery = _step8.value;
 
           var foundQuery = {};
           // console.log(foundQuery);
           Object.entries(matchedBookIndex).forEach(function (objectArray) {
             var _objectArray = _slicedToArray(objectArray, 2),
                 currentFilename = _objectArray[0],
->>>>>>> invertedIndexClassFunc
                 indexedData = _objectArray[1];
 
             if (!indexedData.hasOwnProperty(individualQuery)) {
@@ -461,63 +507,37 @@ var InvertedIndex = function () {
             if (indexedData.hasOwnProperty(individualQuery)) {
               Object.assign(foundQuery, _defineProperty({}, individualQuery, indexedData[individualQuery]));
             }
-<<<<<<< HEAD
-            if (queryResult.hasOwnProperty(filename)) {
-              Object.assign(queryResult[filename], foundQuery);
-            } else {
-              queryResult[filename] = JSON.parse(JSON.stringify(foundQuery));
-=======
             if (queryResult.hasOwnProperty(currentFilename)) {
               Object.assign(queryResult[currentFilename], foundQuery);
             } else {
               queryResult[currentFilename] = JSON.parse(JSON.stringify(foundQuery));
->>>>>>> invertedIndexClassFunc
             }
           });
         };
 
-<<<<<<< HEAD
-        for (var _iterator6 = allQuery[Symbol.iterator](), _step6; !(_iteratorNormalCompletion6 = (_step6 = _iterator6.next()).done); _iteratorNormalCompletion6 = true) {
+        for (var _iterator8 = allQuery[Symbol.iterator](), _step8; !(_iteratorNormalCompletion8 = (_step8 = _iterator8.next()).done); _iteratorNormalCompletion8 = true) {
           _loop2();
         }
       } catch (err) {
-        _didIteratorError6 = true;
-        _iteratorError6 = err;
+        _didIteratorError8 = true;
+        _iteratorError8 = err;
       } finally {
         try {
-          if (!_iteratorNormalCompletion6 && _iterator6.return) {
-            _iterator6.return();
+          if (!_iteratorNormalCompletion8 && _iterator8.return) {
+            _iterator8.return();
           }
         } finally {
-          if (_didIteratorError6) {
-            throw _iteratorError6;
-=======
-        for (var _iterator7 = allQuery[Symbol.iterator](), _step7; !(_iteratorNormalCompletion7 = (_step7 = _iterator7.next()).done); _iteratorNormalCompletion7 = true) {
-          _loop2();
-        }
-      } catch (err) {
-        _didIteratorError7 = true;
-        _iteratorError7 = err;
-      } finally {
-        try {
-          if (!_iteratorNormalCompletion7 && _iterator7.return) {
-            _iterator7.return();
-          }
-        } finally {
-          if (_didIteratorError7) {
-            throw _iteratorError7;
->>>>>>> invertedIndexClassFunc
+          if (_didIteratorError8) {
+            throw _iteratorError8;
           }
         }
       }
 
-<<<<<<< HEAD
-=======
       if (Object.keys(queryResult).length === 0) {
-        this.searchResult = "";
+        this.searchResult = 'Search Query Not Found';
+      } else {
+        this.searchResult = queryResult;
       }
->>>>>>> invertedIndexClassFunc
-      this.searchResult = queryResult;
     }
   }, {
     key: 'validateFileContent',
@@ -567,20 +587,17 @@ var DataError = function DataError(message, data) {
 
 // module.export = InvertedIndex;
 
-/*
-const indexOne = new InvertedIndex();
-indexOne.createIndex();
-<<<<<<< HEAD
-// console.log(indexOne.createdIndex['book-one.json'].understand);
-indexOne.searchIndex();
-=======
+
+var indexOne = new InvertedIndex();
+
+var allFilenames = indexOne.readBookData(allfiles);
+indexOne.createIndex(allFilenames);
 // console.log(indexOne.createdIndex);
-const index = indexOne.createdIndex;
+var index = indexOne.createdIndex;
 // console.log(index);
 // const filename = undefined;
 // const allQuery = indexOne.takeInSearchQuery();
 indexOne.searchIndex(index, filename, searchQuery);
->>>>>>> invertedIndexClassFunc
 console.log(indexOne.searchResult);
 
 /* for(const error of indexOne.errors) {

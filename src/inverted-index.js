@@ -169,7 +169,7 @@ class DataError {
 
 // module.export = InvertedIndex;
 
-/*
+
 const indexOne = new InvertedIndex();
 
 const allFilenames = indexOne.readBookData(allfiles);
