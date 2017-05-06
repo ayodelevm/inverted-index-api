@@ -4,6 +4,7 @@ import fs from 'fs';
 
 import 'babel-polyfill';
 
+
 export default class InvertedIndex {
   constructor() {
     this.fileContent = null;
@@ -115,9 +116,10 @@ export default class InvertedIndex {
       });
     }
     if (Object.keys(queryResult).length === 0) {
-      this.searchResult = ""
+      this.searchResult = 'Search Query Not Found';
+    } else {
+      this.searchResult = queryResult;
     }
-    this.searchResult = queryResult;
   }
 
   validateFileContent(data) {
@@ -154,5 +156,4 @@ class DataError {
     this.data = data;
   }
 }
-
 
