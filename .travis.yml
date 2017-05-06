@@ -7,13 +7,7 @@ node_js:
 
 before_script:
   - npm install -g gulp
-<<<<<<< HEAD
-script:
-  - gulp
-  - npm install
-  - npm run coverage
-=======
+
 script: 
   - npm install
   - gulp
->>>>>>> updating config files
