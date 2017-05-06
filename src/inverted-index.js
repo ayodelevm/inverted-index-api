@@ -1,4 +1,3 @@
-/* eslint linebreak-style: ["error", "windows"]*/
 import path from 'path';
 import fs from 'fs';
 
@@ -35,7 +34,6 @@ export default class InvertedIndex {
     requestFileObject.forEach(i => filenameAndPath.push({ [i.originalname]: i.path }));
 
     for (const eachFilenameAndPath of filenameAndPath) {
-      console.log(Object.entries(eachFilenameAndPath));
       for ([this.filename, this.filepath] of Object.entries(eachFilenameAndPath)) {
         try {
           this.fileContent = Array.from(JSON.parse(fs.readFileSync(this.filepath, 'utf8')));
@@ -53,7 +51,7 @@ export default class InvertedIndex {
   createIndex(fileObject) {
     const mappedIndex = {};
     for (this.currentFile of fileObject) {
-      if (this.validateFileContent(this.currentFile.fileContent)) {
+      if (this.validateFileContent(this.currentFile.fileContent, this.currentFile.filename)) {
         const wordsCollection = {};
         for (const [index, newObject] of this.currentFile.fileContent.entries()) {
           let titleTextArray = [];
@@ -122,23 +120,23 @@ export default class InvertedIndex {
     }
   }
 
-  validateFileContent(data) {
+  validateFileContent(data, filename) {
     let hasErrors = false;
     if (data.length > 0 && data.some(i =>
       (JSON.stringify(i)[0]) !== '{' && JSON.stringify(i)[JSON.stringify(i).length - 1] !== '}')) {
-      this.errors.push(new DataError('file is not a JSON array', data));
+      this.errors.push(new DataError('file is not a JSON array', filename));
       hasErrors = true;
     }
 
     if (!hasErrors && data.some(i =>
       JSON.stringify(i) === JSON.stringify({})) && Object.keys(data[0]).length === 0) {
-      this.errors.push(new DataError('JSON object cannot be empty or contain empty objects', data));
+      this.errors.push(new DataError('JSON object cannot be empty or contain empty objects', filename));
       hasErrors = true;
     }
 
     if (!hasErrors && data.some(i =>
       i.title === undefined || i.text === undefined)) {
-      this.errors.push(new DataError('Bad JSON Array format', data));
+      this.errors.push(new DataError('Bad JSON Array format', filename));
       hasErrors = true;
     }
     return !hasErrors;
@@ -151,8 +149,8 @@ export default class InvertedIndex {
 }
 
 class DataError {
-  constructor(message, data) {
+  constructor(message, filename) {
     this.message = message;
-    this.data = data;
+    this.filename = filename;
   }
 }
