@@ -7,8 +7,7 @@
     "test": "tests"
   },
   "scripts": {
-    "pretest": "babel src/*.js --out-dir dist && babel tests/*.js --out-dir dist",
-    "test": "./node_modules/babel-istanbul/lib/cli.js cover node_modules/.bin/jasmine-node --verbose --captureExceptions dist/inverted-index-testSpec.js",
+    "test": "gulp coverage",
     "dev": "nodemon --exec babel-node src/inverted-index.js",
     "start": "nodemon --exec babel-node ./app.js"
   },

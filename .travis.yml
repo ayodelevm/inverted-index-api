@@ -10,4 +10,3 @@ before_script:
 script: 
   - npm install
   - gulp
-  - npm run coverage
