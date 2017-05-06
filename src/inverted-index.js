@@ -153,3 +153,23 @@ class DataError {
   }
 }
 
+
+// module.export = InvertedIndex;
+
+
+const indexOne = new InvertedIndex();
+
+const allFilenames = indexOne.readBookData(allfiles);
+indexOne.createIndex(allFilenames);
+// console.log(indexOne.createdIndex);
+const index = indexOne.createdIndex;
+// console.log(index);
+// const filename = undefined;
+// const allQuery = indexOne.takeInSearchQuery();
+indexOne.searchIndex(index, filename, searchQuery);
+console.log(indexOne.searchResult);
+
+/* for(const error of indexOne.errors) {
+  console.log(error.message);
+}*/
+
