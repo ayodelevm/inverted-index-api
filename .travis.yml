@@ -10,3 +10,5 @@ before_script:
 script: 
   - npm install
   - gulp
+  - npm run test
+  - npm run coveralls

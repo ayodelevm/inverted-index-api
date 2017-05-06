@@ -1,3 +1,12 @@
-/node_modules
+node_modules/
 .env
 gulpfile.js
+
+# Coverage Output
+coverage/
+
+# Gulp Output
+dist/
+
+# Multa Files
+uploads/
