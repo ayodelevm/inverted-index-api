@@ -1,5 +1,3 @@
-/* eslint linebreak-style: ["error", "windows"]*/
-
 import gulp from 'gulp';
 // import nodemon from 'gulp-nodemon';
 import jasmineNode from 'gulp-jasmine-node';

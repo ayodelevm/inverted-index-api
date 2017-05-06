@@ -1,4 +1,3 @@
-/* eslint linebreak-style: ["error", "windows"]*/
 import newIndex from '../src/inverted-index';
 
 describe('Inverted Index Tests', () => {
