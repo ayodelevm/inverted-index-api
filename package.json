@@ -7,10 +7,10 @@
     "test": "tests"
   },
   "scripts": {
-    "pretest": "babel src/*.js --out-dir lib && babel tests/*.js --out-dir lib",
-    "test": "./node_modules/.bin/jasmine-node --verbose --captureExceptions lib",
-    "prepublish": "npm test",
-    "start": "nodemon --exec babel-node ./src/inverted-index.js"
+    "pretest": "babel src/*.js --out-dir dist && babel tests/*.js --out-dir dist",
+    "test": "./node_modules/babel-istanbul/lib/cli.js cover node_modules/.bin/jasmine-node --verbose --captureExceptions dist/inverted-index-testSpec.js",
+    "dev": "nodemon --exec babel-node src/inverted-index.js",
+    "start": "nodemon --exec babel-node ./app.js"
   },
   "repository": {
     "type": "git",
@@ -23,14 +23,20 @@
   },
   "homepage": "https://github.com/ayodelevm/inverted-index-api#readme",
   "dependencies": {
+    "babel-istanbul": "^0.12.2",
+    "babel-polyfill": "^6.23.0",
+    "body-parser": "^1.17.1",
     "dotenv": "^4.0.0",
-    "es6-module-loader": "^0.17.11"
+    "es6-module-loader": "^0.17.11",
+    "express": "^4.15.2",
+    "morgan": "^1.8.1"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
     "babel-core": "^6.24.1",
     "babel-loader": "^7.0.0",
-    "babel-preset-latest": "^6.24.1",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-es2015-node5": "^1.2.0",
     "babel-register": "^6.24.1",
     "eslint": "^3.19.0",
     "eslint-config-airbnb": "^14.1.0",
@@ -39,8 +45,14 @@
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^6.9.0",
     "gulp": "^3.9.1",
+    "gulp-babel": "^6.1.2",
+    "gulp-babel-istanbul": "^1.6.0",
+    "gulp-coveralls": "^0.1.4",
+    "gulp-inject-modules": "^1.0.0",
     "gulp-istanbul-report": "0.0.1",
     "gulp-jasmine-node": "^1.0.7",
+    "gulp-nodemon": "^2.2.1",
+    "istanbul": "^0.4.5",
     "jasmine-node": "^1.14.5",
     "supertest": "^3.0.0",
     "webpack": "^2.4.1"
