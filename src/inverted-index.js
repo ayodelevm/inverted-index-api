@@ -5,17 +5,7 @@ import fs from 'fs';
 import 'babel-polyfill';
 
 
-// const path = require('path');
-// const fs = require('fs');
-
-const allfiles = ['book-one.json', 'book-two.json', 'book-three.json'];
-// const searchQuery = [["it's first string"], ['to', 'of'], 'reminscence'];
-//const searchQuery = [];
-const filename = ['book-one.json', 'book-three.json'];
-const searchQuery = ['first string', 'around', ['world', 'reminscence']];
-
 export default class InvertedIndex {
-  // Inverted index class attributes goes here
   constructor() {
     this.fileContent = null;
     this.currentPath = null;
@@ -43,15 +33,19 @@ export default class InvertedIndex {
   *readBookDataApiMulter([...requestFileObject]) {
     const filenameAndPath = [];
     requestFileObject.forEach(i => filenameAndPath.push({ [i.originalname]: i.path }));
-    for (this.eachFilenameAndPath of filenameAndPath) {
-      try {
-        this.fileContent = JSON.parse(fs.readFileSync(this.eachFilenameAndPath.path, 'utf8'));
-        yield {
-          filename: this.eachFilenameAndPath.originalname,
-          fileContent: this.fileContent
-        };
-      } catch (e) {
-        this.errors.push(new DataError('Invalid file', this.filename));
+
+    for (const eachFilenameAndPath of filenameAndPath) {
+      console.log(Object.entries(eachFilenameAndPath));
+      for ([this.filename, this.filepath] of Object.entries(eachFilenameAndPath)) {
+        try {
+          this.fileContent = Array.from(JSON.parse(fs.readFileSync(this.filepath, 'utf8')));
+          yield {
+            filename: this.filename,
+            fileContent: this.fileContent
+          };
+        } catch (e) {
+          this.errors.push(new DataError('Invalid file', this.filename));
+        }
       }
     }
   }
@@ -86,7 +80,6 @@ export default class InvertedIndex {
           yield newQuery;
         }
       }
-    //}
   }
 
   searchIndex(index, filename, uniqueSearchQuery) {
@@ -107,7 +100,6 @@ export default class InvertedIndex {
     const allQuery = this.takeInSearchQuery(uniqueSearchQueryParams);
     for (const individualQuery of allQuery) {
       const foundQuery = {};
-      // console.log(foundQuery);
       Object.entries(matchedBookIndex).forEach((objectArray) => {
         const [currentFilename, indexedData] = objectArray;
         if (!indexedData.hasOwnProperty(individualQuery)) {
@@ -135,7 +127,6 @@ export default class InvertedIndex {
     if (data.length > 0 && data.some(i =>
       (JSON.stringify(i)[0]) !== '{' && JSON.stringify(i)[JSON.stringify(i).length - 1] !== '}')) {
       this.errors.push(new DataError('file is not a JSON array', data));
-      // throw new Error('file content is not a JSON Array');
       hasErrors = true;
     }
 
@@ -166,23 +157,4 @@ class DataError {
   }
 }
 
-
-// module.export = InvertedIndex;
-
-
-const indexOne = new InvertedIndex();
-
-const allFilenames = indexOne.readBookData(allfiles);
-indexOne.createIndex(allFilenames);
-// console.log(indexOne.createdIndex);
-const index = indexOne.createdIndex;
-// console.log(index);
-// const filename = undefined;
-// const allQuery = indexOne.takeInSearchQuery();
-indexOne.searchIndex(index, filename, searchQuery);
-console.log(indexOne.searchResult);
-
-/* for(const error of indexOne.errors) {
-  console.log(error.message);
-}*/
 

@@ -27,17 +27,7 @@ function _toArray(arr) { return Array.isArray(arr) ? arr : Array.from(arr); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-// const path = require('path');
-// const fs = require('fs');
-
-var allfiles = ['book-one.json', 'book-two.json', 'book-three.json'];
-// const searchQuery = [["it's first string"], ['to', 'of'], 'reminscence'];
-//const searchQuery = [];
-var filename = ['book-one.json', 'book-three.json'];
-var searchQuery = ['first string', 'around', ['world', 'reminscence']];
-
 var InvertedIndex = function () {
-  // Inverted index class attributes goes here
   function InvertedIndex() {
     _classCallCheck(this, InvertedIndex);
 
@@ -495,7 +485,6 @@ var InvertedIndex = function () {
           var individualQuery = _step8.value;
 
           var foundQuery = {};
-          // console.log(foundQuery);
           Object.entries(matchedBookIndex).forEach(function (objectArray) {
             var _objectArray = _slicedToArray(objectArray, 2),
                 currentFilename = _objectArray[0],
@@ -547,7 +536,6 @@ var InvertedIndex = function () {
         return JSON.stringify(i)[0] !== '{' && JSON.stringify(i)[JSON.stringify(i).length - 1] !== '}';
       })) {
         this.errors.push(new DataError('file is not a JSON array', data));
-        // throw new Error('file content is not a JSON Array');
         hasErrors = true;
       }
 
@@ -584,22 +572,3 @@ var DataError = function DataError(message, data) {
   this.message = message;
   this.data = data;
 };
-
-// module.export = InvertedIndex;
-
-
-var indexOne = new InvertedIndex();
-
-var allFilenames = indexOne.readBookData(allfiles);
-indexOne.createIndex(allFilenames);
-// console.log(indexOne.createdIndex);
-var index = indexOne.createdIndex;
-// console.log(index);
-// const filename = undefined;
-// const allQuery = indexOne.takeInSearchQuery();
-indexOne.searchIndex(index, filename, searchQuery);
-console.log(indexOne.searchResult);
-
-/* for(const error of indexOne.errors) {
-  console.log(error.message);
-}*/

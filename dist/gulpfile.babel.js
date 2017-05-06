@@ -30,9 +30,18 @@ var _babelPresetEs2015Node2 = _interopRequireDefault(_babelPresetEs2015Node);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+// import nodemon from 'gulp-nodemon';
 require('dotenv').config();
 // Run app server
+/* gulp.task('serve', () =>
+  nodemon({
+    script: 'index.js',
+    ext: 'js html',
+    env: { NODE_ENV: process.env.NODE_ENV }
+  })
+);*/
 
+// import istanbulReport from 'gulp-istanbul-report';
 /* eslint linebreak-style: ["error", "windows"]*/
 
 _gulp2.default.task('transpile', function () {
