@@ -7,3 +7,6 @@ coverage/
 
 # Gulp Output
 dist/
+
+# Multa Files
+uploads/

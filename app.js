@@ -41,11 +41,3 @@ router.route('/search')
 
 server.listen(process.env.PORT_DEV);
 console.log('server running at port: ', process.env.PORT_DEV);
-
-
-import multer from 'multer'
-import fs from 'fs'
-
-const upload = multer({dest: 'uploads'});
-
-router.post('/', upload.single('file', (req, res)))
