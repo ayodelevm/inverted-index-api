@@ -7,7 +7,6 @@ import 'babel-polyfill';
 // const path = require('path');
 // const fs = require('fs');
 
-
 const allfiles = ['book-one.json', 'book-two.json', 'book-three.json'];
 // const searchQuery = [["it's first string"], ['to', 'of'], 'reminscence'];
 //const searchQuery = [];
@@ -171,6 +170,7 @@ class DataError {
 
 
 const indexOne = new InvertedIndex();
+
 const allFilenames = indexOne.readBookData(allfiles);
 indexOne.createIndex(allFilenames);
 // console.log(indexOne.createdIndex);
