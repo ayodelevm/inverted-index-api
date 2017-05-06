@@ -1,5 +1,5 @@
 /* eslint linebreak-style: ["error", "windows"]*/
-import newIndex from '../dist/inverted-index';
+import newIndex from '../src/inverted-index';
 
 describe('Inverted Index Tests', () => {
   describe('Validate data', () => {

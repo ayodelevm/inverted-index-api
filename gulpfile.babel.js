@@ -12,13 +12,6 @@ import es2015Preset from 'babel-preset-es2015-node5';
 
 require('dotenv').config();
 // Run app server
-/* gulp.task('serve', () =>
-  nodemon({
-    script: 'index.js',
-    ext: 'js html',
-    env: { NODE_ENV: process.env.NODE_ENV }
-  })
-);*/
 
 gulp.task('transpile', () => {
   gulp.src(['./src/*.js', './tests/*.js', './*.js'])
@@ -44,7 +37,7 @@ gulp.task('cover', () => {
 });
 // Generate coverage report
 gulp.task('coverage', () => {
-  gulp.src(['dist/inverted-index.js'])
+  gulp.src(['src/inverted-index.js'])
     .pipe(gulpBabelIstanbul())
     .pipe(injectModules())
     .on('finish', () => {
