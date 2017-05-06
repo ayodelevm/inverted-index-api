@@ -7,7 +7,7 @@ node_js:
 
 before_script:
   - npm install -g gulp
-script: 
+script:
   - gulp
   - npm install
   - npm run coverage
