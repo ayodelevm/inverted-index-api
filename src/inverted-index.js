@@ -4,6 +4,14 @@ import fs from 'fs';
 
 import 'babel-polyfill';
 
+// const path = require('path');
+// const fs = require('fs');
+
+// const allfiles = ['book-one.json', 'book-two.json', 'book-three.json'];
+// const searchQuery = [["it's first string"], ['to', 'of'], 'reminscence'];
+// const searchQuery = [];
+// const filename = ['book-one.json', 'book-three.json'];
+// const searchQuery = ['first string', 'around', ['world', 'remincense']];
 
 export default class InvertedIndex {
   constructor() {
@@ -76,6 +84,7 @@ export default class InvertedIndex {
           yield newQuery;
         }
       }
+    //}
   }
 
   searchIndex(index, filename, uniqueSearchQuery) {
@@ -96,6 +105,7 @@ export default class InvertedIndex {
     const allQuery = this.takeInSearchQuery(uniqueSearchQueryParams);
     for (const individualQuery of allQuery) {
       const foundQuery = {};
+      // console.log(foundQuery);
       Object.entries(matchedBookIndex).forEach((objectArray) => {
         const [currentFilename, indexedData] = objectArray;
         if (!indexedData.hasOwnProperty(individualQuery)) {
@@ -112,10 +122,9 @@ export default class InvertedIndex {
       });
     }
     if (Object.keys(queryResult).length === 0) {
-      this.searchResult = 'Search Query Not Found';
-    } else {
-      this.searchResult = queryResult;
+      this.searchResult = ""
     }
+    this.searchResult = queryResult;
   }
 
   validateFileContent(data) {
@@ -158,9 +167,7 @@ class DataError {
 
 
 const indexOne = new InvertedIndex();
-
-const allFilenames = indexOne.readBookData(allfiles);
-indexOne.createIndex(allFilenames);
+indexOne.createIndex();
 // console.log(indexOne.createdIndex);
 const index = indexOne.createdIndex;
 // console.log(index);

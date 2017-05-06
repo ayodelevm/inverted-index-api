@@ -64,4 +64,7 @@ gulp.task('coverage', () => {
 
 
 gulp.task('default', ['transpile', 'run-test', 'coverage']);
+<<<<<<< HEAD
 
+=======
+>>>>>>> chore: Adding badges to readme file, updating package.json and server files
