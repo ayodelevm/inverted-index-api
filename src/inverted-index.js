@@ -2,26 +2,17 @@
 import path from 'path';
 import fs from 'fs';
 
-<<<<<<< HEAD
-require('babel-polyfill');
-=======
 import 'babel-polyfill';
->>>>>>> invertedIndexClassFunc
+
 
 // const path = require('path');
 // const fs = require('fs');
 
-<<<<<<< HEAD
-// const allfiles = ['book-one.json', 'book-two.json', 'book-three.json'];
-// const searchQuery = [["it's first string"], ['to', 'of'], 'reminscence'];
-// const searchQuery = ['first string', 'around', ['world', 'remincense']];
-=======
 const allfiles = ['book-one.json', 'book-two.json', 'book-three.json'];
 // const searchQuery = [["it's first string"], ['to', 'of'], 'reminscence'];
 //const searchQuery = [];
 const filename = ['book-one.json', 'book-three.json'];
 const searchQuery = ['first string', 'around', ['world', 'reminscence']];
->>>>>>> invertedIndexClassFunc
 
 export default class InvertedIndex {
   // Inverted index class attributes goes here
@@ -175,22 +166,12 @@ class DataError {
   }
 }
 
-<<<<<<< HEAD
-=======
-
-// module.export = InvertedIndex;
-
->>>>>>> invertedIndexClassFunc
 
 // module.export = InvertedIndex;
 
 /*
 const indexOne = new InvertedIndex();
-<<<<<<< HEAD
-indexOne.createIndex();
-// console.log(indexOne.createdIndex['book-one.json'].understand);
-indexOne.searchIndex();
-=======
+
 const allFilenames = indexOne.readBookData(allfiles);
 indexOne.createIndex(allFilenames);
 // console.log(indexOne.createdIndex);
@@ -199,7 +180,6 @@ const index = indexOne.createdIndex;
 // const filename = undefined;
 // const allQuery = indexOne.takeInSearchQuery();
 indexOne.searchIndex(index, filename, searchQuery);
->>>>>>> invertedIndexClassFunc
 console.log(indexOne.searchResult);
 
 /* for(const error of indexOne.errors) {
