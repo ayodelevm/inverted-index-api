@@ -17,6 +17,11 @@ var _fs = require('fs');
 
 var _fs2 = _interopRequireDefault(_fs);
 
+<<<<<<< HEAD
+=======
+require('babel-polyfill');
+
+>>>>>>> invertedIndexClassFunc
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -25,13 +30,21 @@ function _toArray(arr) { return Array.isArray(arr) ? arr : Array.from(arr); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+<<<<<<< HEAD
 require('babel-polyfill');
 
+=======
+>>>>>>> invertedIndexClassFunc
 // const path = require('path');
 // const fs = require('fs');
 
 // const allfiles = ['book-one.json', 'book-two.json', 'book-three.json'];
 // const searchQuery = [["it's first string"], ['to', 'of'], 'reminscence'];
+<<<<<<< HEAD
+=======
+// const searchQuery = [];
+// const filename = ['book-one.json', 'book-three.json'];
+>>>>>>> invertedIndexClassFunc
 // const searchQuery = ['first string', 'around', ['world', 'remincense']];
 
 var InvertedIndex = function () {
@@ -164,9 +177,16 @@ var InvertedIndex = function () {
 
               try {
                 var _loop = function _loop() {
+<<<<<<< HEAD
                   var _step3$value = _slicedToArray(_step3.value, 2),
                       index = _step3$value[0],
                       newObject = _step3$value[1];
+=======
+                  var _ref3 = _step3.value;
+                  _ref4 = _slicedToArray(_ref3, 2);
+                  var index = _ref4[0];
+                  var newObject = _ref4[1];
+>>>>>>> invertedIndexClassFunc
 
                   var titleTextArray = [];
                   titleTextArray = titleTextArray.concat(InvertedIndex.sanitizeData(newObject.title));
@@ -181,6 +201,11 @@ var InvertedIndex = function () {
                 };
 
                 for (var _iterator3 = _this.currentFile.fileContent.entries()[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+<<<<<<< HEAD
+=======
+                  var _ref4;
+
+>>>>>>> invertedIndexClassFunc
                   _loop();
                 }
               } catch (err) {
@@ -220,9 +245,15 @@ var InvertedIndex = function () {
     }
   }, {
     key: 'takeInSearchQuery',
+<<<<<<< HEAD
     value: regeneratorRuntime.mark(function takeInSearchQuery(_ref3) {
       var _ref4 = _toArray(_ref3),
           allSearchQuery = _ref4.slice(0);
+=======
+    value: regeneratorRuntime.mark(function takeInSearchQuery(_ref5) {
+      var _ref6 = _toArray(_ref5),
+          allSearchQuery = _ref6.slice(0);
+>>>>>>> invertedIndexClassFunc
 
       var _iteratorNormalCompletion4, _didIteratorError4, _iteratorError4, _iterator4, _step4, query, _iteratorNormalCompletion5, _didIteratorError5, _iteratorError5, _iterator5, _step5, newQuery;
 
@@ -349,6 +380,7 @@ var InvertedIndex = function () {
     })
   }, {
     key: 'searchIndex',
+<<<<<<< HEAD
     value: function searchIndex() {
       var _this2 = this;
 
@@ -367,6 +399,60 @@ var InvertedIndex = function () {
           Object.entries(_this2.createdIndex).forEach(function (objectArray) {
             var _objectArray = _slicedToArray(objectArray, 2),
                 filename = _objectArray[0],
+=======
+    value: function searchIndex(index, filename, uniqueSearchQuery) {
+      var indexParams = void 0,
+          filenameParams = void 0,
+          uniqueSearchQueryParams = void 0;
+      var matchedBookIndex = {};
+      var queryResult = {};
+      if (arguments['2'] === undefined) {
+        matchedBookIndex = arguments['0'];filenameParams = undefined;
+        uniqueSearchQueryParams = arguments['1'];
+      } else {
+        indexParams = index;filenameParams = filename;uniqueSearchQueryParams = uniqueSearchQuery;
+        var _iteratorNormalCompletion6 = true;
+        var _didIteratorError6 = false;
+        var _iteratorError6 = undefined;
+
+        try {
+          for (var _iterator6 = filenameParams[Symbol.iterator](), _step6; !(_iteratorNormalCompletion6 = (_step6 = _iterator6.next()).done); _iteratorNormalCompletion6 = true) {
+            var eachFilename = _step6.value;
+
+            if (indexParams.hasOwnProperty(eachFilename)) {
+              Object.assign(matchedBookIndex, _defineProperty({}, eachFilename, indexParams[eachFilename]));
+            }
+          }
+        } catch (err) {
+          _didIteratorError6 = true;
+          _iteratorError6 = err;
+        } finally {
+          try {
+            if (!_iteratorNormalCompletion6 && _iterator6.return) {
+              _iterator6.return();
+            }
+          } finally {
+            if (_didIteratorError6) {
+              throw _iteratorError6;
+            }
+          }
+        }
+      }
+      var allQuery = this.takeInSearchQuery(uniqueSearchQueryParams);
+      var _iteratorNormalCompletion7 = true;
+      var _didIteratorError7 = false;
+      var _iteratorError7 = undefined;
+
+      try {
+        var _loop2 = function _loop2() {
+          var individualQuery = _step7.value;
+
+          var foundQuery = {};
+          // console.log(foundQuery);
+          Object.entries(matchedBookIndex).forEach(function (objectArray) {
+            var _objectArray = _slicedToArray(objectArray, 2),
+                currentFilename = _objectArray[0],
+>>>>>>> invertedIndexClassFunc
                 indexedData = _objectArray[1];
 
             if (!indexedData.hasOwnProperty(individualQuery)) {
@@ -375,14 +461,22 @@ var InvertedIndex = function () {
             if (indexedData.hasOwnProperty(individualQuery)) {
               Object.assign(foundQuery, _defineProperty({}, individualQuery, indexedData[individualQuery]));
             }
+<<<<<<< HEAD
             if (queryResult.hasOwnProperty(filename)) {
               Object.assign(queryResult[filename], foundQuery);
             } else {
               queryResult[filename] = JSON.parse(JSON.stringify(foundQuery));
+=======
+            if (queryResult.hasOwnProperty(currentFilename)) {
+              Object.assign(queryResult[currentFilename], foundQuery);
+            } else {
+              queryResult[currentFilename] = JSON.parse(JSON.stringify(foundQuery));
+>>>>>>> invertedIndexClassFunc
             }
           });
         };
 
+<<<<<<< HEAD
         for (var _iterator6 = allQuery[Symbol.iterator](), _step6; !(_iteratorNormalCompletion6 = (_step6 = _iterator6.next()).done); _iteratorNormalCompletion6 = true) {
           _loop2();
         }
@@ -397,10 +491,32 @@ var InvertedIndex = function () {
         } finally {
           if (_didIteratorError6) {
             throw _iteratorError6;
+=======
+        for (var _iterator7 = allQuery[Symbol.iterator](), _step7; !(_iteratorNormalCompletion7 = (_step7 = _iterator7.next()).done); _iteratorNormalCompletion7 = true) {
+          _loop2();
+        }
+      } catch (err) {
+        _didIteratorError7 = true;
+        _iteratorError7 = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion7 && _iterator7.return) {
+            _iterator7.return();
+          }
+        } finally {
+          if (_didIteratorError7) {
+            throw _iteratorError7;
+>>>>>>> invertedIndexClassFunc
           }
         }
       }
 
+<<<<<<< HEAD
+=======
+      if (Object.keys(queryResult).length === 0) {
+        this.searchResult = "";
+      }
+>>>>>>> invertedIndexClassFunc
       this.searchResult = queryResult;
     }
   }, {
@@ -454,8 +570,17 @@ var DataError = function DataError(message, data) {
 /*
 const indexOne = new InvertedIndex();
 indexOne.createIndex();
+<<<<<<< HEAD
 // console.log(indexOne.createdIndex['book-one.json'].understand);
 indexOne.searchIndex();
+=======
+// console.log(indexOne.createdIndex);
+const index = indexOne.createdIndex;
+// console.log(index);
+// const filename = undefined;
+// const allQuery = indexOne.takeInSearchQuery();
+indexOne.searchIndex(index, filename, searchQuery);
+>>>>>>> invertedIndexClassFunc
 console.log(indexOne.searchResult);
 
 /* for(const error of indexOne.errors) {
