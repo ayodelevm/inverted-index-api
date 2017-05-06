@@ -7,9 +7,11 @@
     "test": "tests"
   },
   "scripts": {
+
     "test": "gulp coverage",
     "dev": "nodemon --exec babel-node src/inverted-index.js",
     "start": "nodemon --exec babel-node ./app.js"
+
   },
   "repository": {
     "type": "git",
@@ -22,7 +24,6 @@
   },
   "homepage": "https://github.com/ayodelevm/inverted-index-api#readme",
   "dependencies": {
-    "babel-istanbul": "^0.12.2",
     "babel-polyfill": "^6.23.0",
     "body-parser": "^1.17.1",
     "dotenv": "^4.0.0",

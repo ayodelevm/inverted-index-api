@@ -1,5 +1,32 @@
 'use strict';
 
+<<<<<<< HEAD
+var dotenv = require('dotenv');
+var express = require('express');
+var bodyParser = require('body-parser');
+var morgan = require('morgan');
+
+var server = express();
+
+dotenv.config({ silent: true });
+
+// log requests with morgan
+server.use(morgan('dev'));
+
+// parse the payload
+server.use(bodyParser.urlencoded({ extended: true }));
+server.use(bodyParser.json());
+
+var router = express.Router();
+
+server.use('/api', router);
+
+router.route('/v').get(function (req, res) {
+    res.status(200).send({ message: 'Hello World.' });
+}).post(function (req, res) {
+    console.log(req.body);
+    res.status(200).send({ message: 'Hello World.' });
+=======
 var _dotenv = require('dotenv');
 
 var _dotenv2 = _interopRequireDefault(_dotenv);
@@ -75,6 +102,7 @@ router.route('/search').post(function (req, res) {
   var individualQueries = newInvertedIndex.takeInSearchQuery(searchQueries);
   newInvertedIndex.searchIndex(individualQueries);
   res.status(200).json(newInvertedIndex.searchResult);
+>>>>>>> invertedIndexClassFunc
 });
 
 server.listen(process.env.PORT_DEV);

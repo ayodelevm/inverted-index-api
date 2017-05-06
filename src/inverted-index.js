@@ -4,7 +4,6 @@ import fs from 'fs';
 
 import 'babel-polyfill';
 
-
 export default class InvertedIndex {
   constructor() {
     this.fileContent = null;
