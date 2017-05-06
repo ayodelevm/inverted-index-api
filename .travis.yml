@@ -8,6 +8,7 @@ node_js:
 before_script:
   - npm install -g gulp
 script: 
-  - gulp
   - npm install
-  - npm run coverage
+  - gulp
+  - npm run test
+  - npm run coveralls
