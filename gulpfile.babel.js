@@ -57,4 +57,3 @@ gulp.task('coverage', () => {
 
 
 gulp.task('default', ['transpile', 'run-test', 'coverage']);
-
