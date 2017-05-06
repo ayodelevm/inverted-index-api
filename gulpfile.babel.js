@@ -1,7 +1,9 @@
 /* eslint linebreak-style: ["error", "windows"]*/
 
 import gulp from 'gulp';
+// import nodemon from 'gulp-nodemon';
 import jasmineNode from 'gulp-jasmine-node';
+// import istanbulReport from 'gulp-istanbul-report';
 import gulpCoveralls from 'gulp-coveralls';
 import babel from 'gulp-babel';
 import gulpBabelIstanbul from 'gulp-babel-istanbul';
@@ -10,6 +12,13 @@ import es2015Preset from 'babel-preset-es2015-node5';
 
 require('dotenv').config();
 // Run app server
+/* gulp.task('serve', () =>
+  nodemon({
+    script: 'index.js',
+    ext: 'js html',
+    env: { NODE_ENV: process.env.NODE_ENV }
+  })
+);*/
 
 gulp.task('transpile', () => {
   gulp.src(['./src/*.js', './tests/*.js', './*.js'])
