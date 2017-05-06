@@ -2,14 +2,17 @@
 import path from 'path';
 import fs from 'fs';
 
-require('babel-polyfill');
+import 'babel-polyfill';
 
 // const path = require('path');
 // const fs = require('fs');
 
-// const allfiles = ['book-one.json', 'book-two.json', 'book-three.json'];
+
+const allfiles = ['book-one.json', 'book-two.json', 'book-three.json'];
 // const searchQuery = [["it's first string"], ['to', 'of'], 'reminscence'];
-// const searchQuery = ['first string', 'around', ['world', 'remincense']];
+//const searchQuery = [];
+const filename = ['book-one.json', 'book-three.json'];
+const searchQuery = ['first string', 'around', ['world', 'reminscence']];
 
 export default class InvertedIndex {
   // Inverted index class attributes goes here
@@ -37,7 +40,23 @@ export default class InvertedIndex {
     }
   }
 
-  createIndex(fileObject = this.readBookData(allfiles)) {
+  *readBookDataApiMulter([...requestFileObject]) {
+    const filenameAndPath = [];
+    requestFileObject.forEach(i => filenameAndPath.push({ [i.originalname]: i.path }));
+    for (this.eachFilenameAndPath of filenameAndPath) {
+      try {
+        this.fileContent = JSON.parse(fs.readFileSync(this.eachFilenameAndPath.path, 'utf8'));
+        yield {
+          filename: this.eachFilenameAndPath.originalname,
+          fileContent: this.fileContent
+        };
+      } catch (e) {
+        this.errors.push(new DataError('Invalid file', this.filename));
+      }
+    }
+  }
+
+  createIndex(fileObject) {
     const mappedIndex = {};
     for (this.currentFile of fileObject) {
       if (this.validateFileContent(this.currentFile.fileContent)) {
@@ -61,34 +80,54 @@ export default class InvertedIndex {
   }
 
   *takeInSearchQuery([...allSearchQuery]) {
-    allSearchQuery = allSearchQuery.reduce((a, b) => a.concat(b), []);
-    for (const query of allSearchQuery) {
-      for (const newQuery of InvertedIndex.sanitizeData(query)) {
-        yield newQuery;
+      allSearchQuery = allSearchQuery.reduce((a, b) => a.concat(b), []);
+      for (const query of allSearchQuery) {
+        for (const newQuery of InvertedIndex.sanitizeData(query)) {
+          yield newQuery;
+        }
       }
-    }
+    //}
   }
 
-  searchIndex(allQuery = this.takeInSearchQuery(searchQuery)) {
+  searchIndex(index, filename, uniqueSearchQuery) {
+    let indexParams, filenameParams, uniqueSearchQueryParams;
+    let matchedBookIndex = {};
     const queryResult = {};
+    if (arguments['2'] === undefined) {
+      matchedBookIndex = arguments['0']; filenameParams = undefined;
+      uniqueSearchQueryParams = arguments['1'];
+    } else {
+      indexParams = index; filenameParams = filename; uniqueSearchQueryParams = uniqueSearchQuery;
+      for (const eachFilename of filenameParams) {
+        if (indexParams.hasOwnProperty(eachFilename)) {
+          Object.assign(matchedBookIndex, { [eachFilename]: indexParams[eachFilename] });
+        }
+      }
+    }
+    const allQuery = this.takeInSearchQuery(uniqueSearchQueryParams);
     for (const individualQuery of allQuery) {
       const foundQuery = {};
-      Object.entries(this.createdIndex).forEach((objectArray) => {
-        const [filename, indexedData] = objectArray;
+      // console.log(foundQuery);
+      Object.entries(matchedBookIndex).forEach((objectArray) => {
+        const [currentFilename, indexedData] = objectArray;
         if (!indexedData.hasOwnProperty(individualQuery)) {
           return;
         }
         if (indexedData.hasOwnProperty(individualQuery)) {
           Object.assign(foundQuery, { [individualQuery]: indexedData[individualQuery] });
         }
-        if (queryResult.hasOwnProperty(filename)) {
-          Object.assign(queryResult[filename], foundQuery);
+        if (queryResult.hasOwnProperty(currentFilename)) {
+          Object.assign(queryResult[currentFilename], foundQuery);
         } else {
-          queryResult[filename] = JSON.parse(JSON.stringify(foundQuery));
+          queryResult[currentFilename] = JSON.parse(JSON.stringify(foundQuery));
         }
       });
     }
-    this.searchResult = queryResult;
+    if (Object.keys(queryResult).length === 0) {
+      this.searchResult = 'Search Query Not Found';
+    } else {
+      this.searchResult = queryResult;
+    }
   }
 
   validateFileContent(data) {
@@ -130,11 +169,16 @@ class DataError {
 
 // module.export = InvertedIndex;
 
-/*
+
 const indexOne = new InvertedIndex();
-indexOne.createIndex();
-// console.log(indexOne.createdIndex['book-one.json'].understand);
-indexOne.searchIndex();
+const allFilenames = indexOne.readBookData(allfiles);
+indexOne.createIndex(allFilenames);
+// console.log(indexOne.createdIndex);
+const index = indexOne.createdIndex;
+// console.log(index);
+// const filename = undefined;
+// const allQuery = indexOne.takeInSearchQuery();
+indexOne.searchIndex(index, filename, searchQuery);
 console.log(indexOne.searchResult);
 
 /* for(const error of indexOne.errors) {
