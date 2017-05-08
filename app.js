@@ -10,12 +10,11 @@ const server = express();
 dotenv.config({ silent: true });
 
 
-// log requests with morgan
 server.use(morgan('dev'));
 
-// parse the payload
-server.use(bodyParser.urlencoded({ extended: true }));
-server.use(bodyParser.json());
+server.use(bodyParser.json())
+      .use(bodyParser.urlencoded({ extended: true }));
+
 
 const router = express.Router();
 const upload = multer({ dest: 'uploads/' });
@@ -50,3 +49,6 @@ router.route('/search')
 
 server.listen(process.env.PORT_DEV);
 console.log('server running at port: ', process.env.PORT_DEV);
+
+export default server;
+
