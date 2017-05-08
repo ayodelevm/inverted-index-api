@@ -7,7 +7,7 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "gulp coverage",
+    "test": "gulp coveralls",
     "dev": "nodemon --exec babel-node src/inverted-index.js",
     "start": "nodemon --exec babel-node ./app.js",
     "coveralls": "cat ./coverage/lcov.info | coveralls"
