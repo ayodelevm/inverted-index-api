@@ -18,7 +18,7 @@ export default class InvertedIndex {
    */
   constructor() {
     this.fileContent = null;
-    this.createdIndex = null;
+    this.createdIndex = {};
     this.searchResult = null;
     this.errors = [];
   }
@@ -83,7 +83,7 @@ export default class InvertedIndex {
       titleTextArray = titleTextArray.concat(InvertedIndex.sanitizeData(newObject.title));
       titleTextArray = titleTextArray.concat(InvertedIndex.sanitizeData(newObject.text));
       titleTextArray.forEach((word) => {
-        if (Collection.hasOwnProperty(word)) {
+        if (word in Collection) {
           Collection[word] = Array.from(new Set(Collection[word].concat([index])));
         } else {
           Collection[word] = [index];
@@ -105,7 +105,7 @@ export default class InvertedIndex {
         const tokenIndexCollection = InvertedIndex.tokenizeAndIndex(this.currentFile.fileContent);
         mappedIndex[this.currentFile.filename] = JSON.parse(JSON.stringify(tokenIndexCollection));
       }
-      this.createdIndex = mappedIndex;
+      Object.assign(this.createdIndex, mappedIndex);
     }
   }
 
@@ -126,7 +126,7 @@ export default class InvertedIndex {
     } else {
       indexParams = index; filenameParams = filename; allSearchQueryParams = allSearchQuery;
       for (const eachFilename of filenameParams) {
-        if (indexParams.hasOwnProperty(eachFilename)) {
+        if (eachFilename in indexParams) {
           Object.assign(indexToBeSearched, { [eachFilename]: indexParams[eachFilename] });
         }
       }
@@ -167,13 +167,13 @@ export default class InvertedIndex {
       const foundQuery = {};
       Object.entries(sortedArguments.indexToBeSearched).forEach((objectArray) => {
         const [currentFilename, indexedData] = objectArray;
-        if (!indexedData.hasOwnProperty(uniqueQuery)) {
+        if (!(uniqueQuery in indexedData)) {
           return;
         }
-        if (indexedData.hasOwnProperty(uniqueQuery)) {
+        if (uniqueQuery in indexedData) {
           Object.assign(foundQuery, { [uniqueQuery]: indexedData[uniqueQuery] });
         }
-        if (queryResult.hasOwnProperty(currentFilename)) {
+        if (currentFilename in queryResult) {
           Object.assign(queryResult[currentFilename], foundQuery);
         } else {
           queryResult[currentFilename] = JSON.parse(JSON.stringify(foundQuery));
