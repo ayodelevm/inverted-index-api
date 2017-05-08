@@ -1,57 +1,59 @@
 import gulp from 'gulp';
-// import nodemon from 'gulp-nodemon';
+import nodemon from 'gulp-nodemon';
 import jasmineNode from 'gulp-jasmine-node';
-// import istanbulReport from 'gulp-istanbul-report';
 import gulpCoveralls from 'gulp-coveralls';
 import babel from 'gulp-babel';
 import gulpBabelIstanbul from 'gulp-babel-istanbul';
 import injectModules from 'gulp-inject-modules';
 import es2015Preset from 'babel-preset-es2015-node5';
+import dotenv from 'dotenv';
 
-require('dotenv').config();
-// Run app server
+dotenv.config();
 
 gulp.task('transpile', () => {
-  gulp.src(['./src/*.js', './tests/*.js', './*.js'])
+  gulp.src('./app.js')
     .pipe(babel({
       presets: [es2015Preset]
     }))
     .pipe(gulp.dest('dist/'));
 });
 
-
-// Run tests
-gulp.task('run-test', ['transpile'], () => {
-  gulp.src(['dist/inverted-index-testSpec.js'])
+gulp.task('run-tests', () => {
+  gulp.src(['tests/*.js'])
+    .pipe(babel())
     .pipe(jasmineNode());
 });
 
-gulp.task('cover', () => {
-  gulp.src('tests/inverted-index-testSpec.js')
-      .pipe(babel())
-      .pipe(injectModules())
-      .pipe(jasmineNode())
-      .pipe(gulpBabelIstanbul.writeReports());
-});
-// Generate coverage report
-gulp.task('coverage', () => {
-  gulp.src(['src/inverted-index.js'])
+gulp.task('serve', ['transpile'], () =>
+  nodemon({
+    script: 'dist/app.js',
+    ext: 'js',
+    env: { NODE_ENV: process.env.NODE_ENV }
+  })
+);
+
+gulp.task('coverage', (cb) => {
+  gulp.src(['src/inverted-index.js', './app.js'])
     .pipe(gulpBabelIstanbul())
     .pipe(injectModules())
     .on('finish', () => {
-      gulp.src('tests/inverted-index-testSpec.js')
+      gulp.src('tests/*.js')
       .pipe(babel({ presets: [es2015Preset] }))
       .pipe(injectModules())
       .pipe(jasmineNode())
       .pipe(gulpBabelIstanbul.writeReports())
       .pipe(gulpBabelIstanbul.enforceThresholds({ thresholds: { global: 50 } }))
-      .on('end', () => {
-        gulp.src('coverage/lcov.info')
-        .pipe(gulpCoveralls());
-      });
+      .on('end', cb);
     });
 });
-// Load code coverage to coveralls
+
+gulp.task('coveralls', ['coverage'], () => {
+  if (!process.env.CI) {
+    return;
+  }
+  return gulp.src('coverage/lcov.info')
+    .pipe(gulpCoveralls());
+});
 
 
-gulp.task('default', ['transpile', 'run-test', 'coverage']);
+gulp.task('default', ['run-tests', 'coveralls']);
