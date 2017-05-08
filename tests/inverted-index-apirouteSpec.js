@@ -55,7 +55,7 @@ describe('create route', () => {
   });
 });
 
-describe('search', () => {
+describe('search route', () => {
   it('give staus error 500 when upload is done in search endpoint', (done) => {
     api.post('/api/search')
       .attach('allFiles', './fixtures/book-one.json')
