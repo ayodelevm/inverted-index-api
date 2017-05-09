@@ -68,7 +68,8 @@ describe('Inverted Index Tests', () => {
       allUniqueQuery.push(individualQuery);
     }
     it('should work with search query in varying formats', () => {
-      expect(allUniqueQuery).toEqual(['first', 'string', 'around', 'world', 'remincense']);
+      expect(allUniqueQuery)
+        .toEqual(['first', 'string', 'around', 'world', 'remincense']);
     });
   });
 
@@ -128,7 +129,7 @@ describe('Inverted Index Tests', () => {
       .toEqual({ around: [0], world: [0], reminscence: [0] });
     });
 
-    it('should return searh query not found when search query returns no match', () => {
+    it('return searh query not found when search query returns no match', () => {
       const newInvertedIndex = new newIndex(),
         allfiles = ['book-one.json', 'book-two.json', 'book-three.json'],
         processedFileObject = newInvertedIndex.readBookData(allfiles),
