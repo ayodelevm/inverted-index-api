@@ -7,6 +7,7 @@ import gulpBabelIstanbul from 'gulp-babel-istanbul';
 import injectModules from 'gulp-inject-modules';
 import es2015Preset from 'babel-preset-es2015-node5';
 import dotenv from 'dotenv';
+import exit from 'gulp-exit';
 
 dotenv.config();
 
@@ -21,7 +22,8 @@ gulp.task('transpile', () => {
 gulp.task('run-tests', () => {
   gulp.src(['tests/*.js'])
     .pipe(babel())
-    .pipe(jasmineNode());
+    .pipe(jasmineNode())
+    .pipe(exit());
 });
 
 gulp.task('serve', ['transpile'], () =>
@@ -43,7 +45,8 @@ gulp.task('coverage', (cb) => {
       .pipe(jasmineNode())
       .pipe(gulpBabelIstanbul.writeReports())
       .pipe(gulpBabelIstanbul.enforceThresholds({ thresholds: { global: 50 } }))
-      .on('end', cb);
+      .on('end', cb)
+      .pipe(exit());
     });
 });
 
