@@ -62,22 +62,14 @@ export default class InvertedIndex {
         try {
           this.fileContent = Array.from(JSON.parse(fs
             .readFileSync(this.filepath, 'utf8')));
-          fs.unlink(this.filepath, (err) => {
-            if (err) {
-              throw new Error('Error while deleting filecopy');
-            }
-          });
+          fs.unlink(this.filepath, (error) => { if (error) throw error; });
           yield {
             filename: this.filename,
             fileContent: this.fileContent
           };
         } catch (e) {
           this.errors.push(new DataError('Invalid file', this.filename));
-          fs.unlink(this.filepath, (err) => {
-            if (err) {
-              throw new Error('Error while deleting filecopy');
-            }
-          });
+          fs.unlink(this.filepath, (error) => { if (error) throw error; });
         }
       }
     }
