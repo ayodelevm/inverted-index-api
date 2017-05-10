@@ -32,7 +32,7 @@
 
   *  Using HTTPS;
 
-    >`https://github.com/ayodelevm/inverted-index-api.git`
+    >`git clone https://github.com/ayodelevm/inverted-index-api.git`
 
 *  Navigate to the repo's folder on your computer
   *  `cd inverted-index-api/`
@@ -47,7 +47,7 @@
   *  Running the command above will run the app at localhost://3000.
 
 ## Tests
-*  The tests have been written using Jasmine-node **[TestCase](https://github.com/mhevery/jasmine-node)** and Supertest**[TestCase](https://www.npmjs.com/package/supertest)** class.
+*  The tests have been written using Jasmine-node **[TestCase](https://github.com/mhevery/jasmine-node)** and Supertest **[TestCase](https://www.npmjs.com/package/supertest)** class.
 *  They are run using the **`coverage`** tool in order to generate test coverage reports.
 *  To run the tests, navigate to the project's folder and open
 *  Issue the following command on terminal.

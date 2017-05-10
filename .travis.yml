@@ -10,3 +10,6 @@ script:
   - gulp run-tests
   - npm run test
   - npm run coveralls
+
+notifications:
+  webhooks: https://coveralls.io/webhook?repo_token=o4Q54byGsbo2r7laPPTHtwjEIQDr5BaXK
