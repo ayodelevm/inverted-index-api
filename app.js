@@ -21,6 +21,9 @@ server.use((req, res, next) => {
   next();
 });
 
+server.get('/', (req, res) => {
+  res.send('Hello world');
+});
 
 const router = express.Router();
 const upload = multer({ dest: 'uploads/' });
@@ -30,7 +33,6 @@ server.use('/api', router);
 
 router.route('/create')
     .post(upload.array('allFiles'), (req, res) => {
-      console.log('=====================\n', req.files.length);
       const allfiles = req.files;
       const fileNameAndContent = newInvertedIndex.readBookDataApiMulter(allfiles);
       newInvertedIndex.createIndex(fileNameAndContent);
@@ -54,8 +56,8 @@ router.route('/search')
     });
 
 
-server.listen(process.env.PORT_DEV);
-console.log('server running at port: ', process.env.PORT_DEV);
+server.listen();
+console.log('server running at port: ', );
 
 export default server;
 
