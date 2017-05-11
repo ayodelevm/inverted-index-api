@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "inverted-index-api application",
   "main": "app.js",
+  "engines": {
+    "node": "v7.3.0",
+    "npm": "4.5.0"
+  },
   "directories": {
     "test": "tests"
   },
