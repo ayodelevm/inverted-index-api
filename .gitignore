@@ -1,0 +1,12 @@
+node_modules/
+.env
+gulpfile.js
+
+# Coverage Output
+coverage/
+
+# Gulp Output
+dist/
+
+# Multer Files
+uploads/
