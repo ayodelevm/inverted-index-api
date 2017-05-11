@@ -56,8 +56,8 @@ router.route('/search')
     });
 
 
-server.listen(process.env.PORT_PROD);
-console.log('server running at port: ', process.env.PORT_PROD);
+server.listen();
+console.log('server running at port: ',);
 
 export default server;
 
