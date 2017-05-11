@@ -15,6 +15,12 @@ server.use(morgan('dev'));
 server.use(bodyParser.json())
       .use(bodyParser.urlencoded({ extended: true }));
 
+server.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  next();
+});
+
 
 const router = express.Router();
 const upload = multer({ dest: 'uploads/' });
@@ -24,6 +30,7 @@ server.use('/api', router);
 
 router.route('/create')
     .post(upload.array('allFiles'), (req, res) => {
+      console.log('=====================\n', req.files.length);
       const allfiles = req.files;
       const fileNameAndContent = newInvertedIndex.readBookDataApiMulter(allfiles);
       newInvertedIndex.createIndex(fileNameAndContent);
