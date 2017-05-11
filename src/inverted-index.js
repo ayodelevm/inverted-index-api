@@ -31,9 +31,11 @@ export default class InvertedIndex {
   * readBookData([...allFilenames]) {
     for (this.filename of allFilenames) {
       process.chdir('./');
-      this.fullpath = path.join(process.cwd(), 'fixtures', this.filename);
+      this.fullpath = path.join(process
+        .cwd(), 'fixtures', this.filename);
       try {
-        this.fileContent = JSON.parse(fs.readFileSync(this.fullpath, 'utf8'));
+        this.fileContent = JSON.parse(fs
+          .readFileSync(this.fullpath, 'utf8'));
         yield {
           filename: this.filename,
           fileContent: this.fileContent
@@ -55,17 +57,19 @@ export default class InvertedIndex {
       filenameAndPath.push({ [requestFile.originalname]: requestFile.path }));
 
     for (const eachFilenameAndPath of filenameAndPath) {
-      for ([this.filename, this.filepath] of Object.entries(eachFilenameAndPath)) {
+      for ([this.filename, this.filepath] of Object
+        .entries(eachFilenameAndPath)) {
         try {
-          this.fileContent = Array.from(JSON.parse(fs.readFileSync(this.filepath, 'utf8')));
-          fs.unlink(this.filepath, (err) => { if (err) { throw new Error('Error while deleting filecopy'); } });
+          this.fileContent = Array.from(JSON.parse(fs
+            .readFileSync(this.filepath, 'utf8')));
+          fs.unlink(this.filepath, (error) => { if (error) throw error; });
           yield {
             filename: this.filename,
             fileContent: this.fileContent
           };
         } catch (e) {
           this.errors.push(new DataError('Invalid file', this.filename));
-          fs.unlink(this.filepath, (err) => { if (err) { throw new Error('Error while deleting filecopy'); } });
+          fs.unlink(this.filepath, (error) => { if (error) throw error; });
         }
       }
     }
@@ -80,11 +84,15 @@ export default class InvertedIndex {
     const Collection = {};
     for (const [index, newObject] of fileContent.entries()) {
       let titleTextArray = [];
-      titleTextArray = titleTextArray.concat(InvertedIndex.sanitizeData(newObject.title));
-      titleTextArray = titleTextArray.concat(InvertedIndex.sanitizeData(newObject.text));
+      titleTextArray = titleTextArray.concat(InvertedIndex
+      .sanitizeData(newObject.title));
+      titleTextArray = titleTextArray.concat(InvertedIndex
+      .sanitizeData(newObject.text));
+
       titleTextArray.forEach((word) => {
         if (word in Collection) {
-          Collection[word] = Array.from(new Set(Collection[word].concat([index])));
+          Collection[word] = Array.from(new Set(Collection[word]
+            .concat([index])));
         } else {
           Collection[word] = [index];
         }
@@ -101,9 +109,13 @@ export default class InvertedIndex {
   createIndex(fileNameAndObject) {
     const mappedIndex = {};
     for (this.currentFile of fileNameAndObject) {
-      if (this.validateFileContent(this.currentFile.fileContent, this.currentFile.filename)) {
-        const tokenIndexCollection = InvertedIndex.tokenizeAndIndex(this.currentFile.fileContent);
-        mappedIndex[this.currentFile.filename] = JSON.parse(JSON.stringify(tokenIndexCollection));
+      if (this.validateFileContent(this.currentFile
+        .fileContent, this.currentFile.filename)) {
+        const tokenIndexCollection = InvertedIndex
+          .tokenizeAndIndex(this.currentFile.fileContent);
+
+        mappedIndex[this.currentFile.filename] = JSON
+          .parse(JSON.stringify(tokenIndexCollection));
       }
       Object.assign(this.createdIndex, mappedIndex);
     }
@@ -124,10 +136,12 @@ export default class InvertedIndex {
       indexToBeSearched = arguments['0']; filenameParams = undefined;
       allSearchQueryParams = arguments['1'];
     } else {
-      indexParams = index; filenameParams = filename; allSearchQueryParams = allSearchQuery;
+      indexParams = index; filenameParams = filename;
+      allSearchQueryParams = allSearchQuery;
       for (const eachFilename of filenameParams) {
         if (eachFilename in indexParams) {
-          Object.assign(indexToBeSearched, { [eachFilename]: indexParams[eachFilename] });
+          Object.assign(indexToBeSearched,
+            { [eachFilename]: indexParams[eachFilename] });
         }
       }
     }
@@ -143,7 +157,8 @@ export default class InvertedIndex {
    * @return {String} - returns a string yielded one at a time
    */
   * tokenizeSearchQuery([...allSearchQuery]) {
-    this.allSearchQuery = allSearchQuery.reduce((a, b) => a.concat(b), []);
+    this.allSearchQuery = allSearchQuery
+      .reduce((a, b) => a.concat(b), []);
     for (const query of this.allSearchQuery) {
       for (const newQuery of InvertedIndex.sanitizeData(query)) {
         yield newQuery;
@@ -160,25 +175,31 @@ export default class InvertedIndex {
    */
   searchIndex(index, filename, allSearchQuery) {
     const queryResult = {};
-    const sortedArguments = InvertedIndex.sortSearchIndexArguments(index, filename, allSearchQuery);
+    const sortedArguments = InvertedIndex
+    .sortSearchIndexArguments(index, filename, allSearchQuery);
 
-    const tokenizedQuery = this.tokenizeSearchQuery(sortedArguments.allSearchQueryParams);
+    const tokenizedQuery = this
+      .tokenizeSearchQuery(sortedArguments.allSearchQueryParams);
     for (const uniqueQuery of tokenizedQuery) {
       const foundQuery = {};
-      Object.entries(sortedArguments.indexToBeSearched).forEach((objectArray) => {
-        const [currentFilename, indexedData] = objectArray;
-        if (!(uniqueQuery in indexedData)) {
-          return;
-        }
-        if (uniqueQuery in indexedData) {
-          Object.assign(foundQuery, { [uniqueQuery]: indexedData[uniqueQuery] });
-        }
-        if (currentFilename in queryResult) {
-          Object.assign(queryResult[currentFilename], foundQuery);
-        } else {
-          queryResult[currentFilename] = JSON.parse(JSON.stringify(foundQuery));
-        }
-      });
+      Object.entries(sortedArguments.indexToBeSearched)
+        .forEach((objectArray) => {
+          const [currentFilename, indexedData] = objectArray;
+          if (!(uniqueQuery in indexedData)) {
+            return;
+          }
+          if (uniqueQuery in indexedData) {
+            Object
+              .assign(foundQuery, { [uniqueQuery]: indexedData[uniqueQuery] });
+          }
+          if (currentFilename in queryResult) {
+            Object
+              .assign(queryResult[currentFilename], foundQuery);
+          } else {
+            queryResult[currentFilename] = JSON
+              .parse(JSON.stringify(foundQuery));
+          }
+        });
     }
     if (Object.keys(queryResult).length === 0) {
       this.searchResult = 'Search Query Not Found';
@@ -196,14 +217,19 @@ export default class InvertedIndex {
   validateFileContent(data, filename) {
     let hasErrors = false;
     if (data.length > 0 && data.some(i =>
-      (JSON.stringify(i)[0]) !== '{' && JSON.stringify(i)[JSON.stringify(i).length - 1] !== '}')) {
-      this.errors.push(new DataError('file is not a JSON array', filename));
+      (JSON.stringify(i)[0]) !== '{' && JSON
+        .stringify(i)[JSON.stringify(i).length - 1] !== '}')) {
+      this.errors
+        .push(new DataError('file is not a JSON array', filename));
       hasErrors = true;
     }
 
     if (!hasErrors && data.some(i =>
-      JSON.stringify(i) === JSON.stringify({})) && Object.keys(data[0]).length === 0) {
-      this.errors.push(new DataError('JSON object cannot be empty or contain empty objects', filename));
+      JSON.stringify(i) === JSON
+        .stringify({})) && Object.keys(data[0]).length === 0) {
+      this.errors.push(new DataError(
+          'JSON object cannot be empty or contain empty objects', filename
+            ));
       hasErrors = true;
     }
 
@@ -221,7 +247,8 @@ export default class InvertedIndex {
  * @return {String} - returns sanitized data
  */
   static sanitizeData(data) {
-    return data.toLowerCase().replace(/[^a-z A-Z 0-9]+/g, '').split(/[\s]\s*/);
+    return data.toLowerCase()
+      .replace(/[^a-z A-Z 0-9]+/g, '').split(/[\s]\s*/);
   }
 
 }
