@@ -3,6 +3,16 @@ import server from '../app';
 
 const api = supertest(server);
 
+describe('Root', () => {
+  it('it should return the right status message at root', (done) => {
+    api.get('/')
+      .end((err, res) => {
+        expect(res.status).toEqual(200);
+        done(err);
+      });
+  });
+});
+
 describe('create route', () => {
   it('responds with the right status message', (done) => {
     api.post('/api/create')
