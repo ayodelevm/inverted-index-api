@@ -9,7 +9,7 @@ import newIndex from './src/inverted-index';
 const server = express();
 dotenv.config({ silent: true });
 
-const port = process.env.PORT
+const port = process.env.PORT;
 
 server.use(morgan('dev'));
 
@@ -23,7 +23,7 @@ server.use((req, res, next) => {
 });
 
 server.get('/', (req, res) => {
-  res.send('Hello world');
+  res.send('Welcome To Inverted-Index-Api-App');
 });
 
 const router = express.Router();
@@ -57,8 +57,9 @@ router.route('/search')
     });
 
 
-server.listen(port);
-console.log('server running at port: ');
+// server.listen(port);
+server.listen(process.env.PORT_DEV);
+console.log('server running at port: ', process.env.PORT_DEV);
 
 export default server;
 
