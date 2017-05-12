@@ -2,7 +2,7 @@ import newIndex from '../src/inverted-index';
 
 describe('Inverted Index Tests', () => {
   describe('Validate data', () => {
-    const allfiles = ['invalid-file.json', 'invalidFile.json',
+    const allfiles = ['invalid-file.json', 'invalidFile.json', 'invalid.txt',
       'not-json-array.json', 'empty-book.json', 'bad-format.json'];
 
     const newInvertedIndex = new newIndex();
@@ -13,20 +13,22 @@ describe('Inverted Index Tests', () => {
       .toBe('Invalid file');
       expect(newInvertedIndex.errors[1].errorMessage)
       .toBe('Invalid file');
+      expect(newInvertedIndex.errors[2].errorMessage)
+      .toBe('Invalid file');
     });
 
     it('Should give error if file is not a JSON Array', () => {
-      expect(newInvertedIndex.errors[2].errorMessage)
+      expect(newInvertedIndex.errors[3].errorMessage)
       .toBe('file is not a JSON array');
     });
 
     it('Should give error if JSON Object is empty or contain empty objects', () => {
-      expect(newInvertedIndex.errors[3].errorMessage)
+      expect(newInvertedIndex.errors[4].errorMessage)
       .toBe('JSON object cannot be empty or contain empty objects');
     });
 
     it('Should throw aapropriate error if JSON Object is malformed', () => {
-      expect(newInvertedIndex.errors[4].errorMessage)
+      expect(newInvertedIndex.errors[5].errorMessage)
       .toBe('Bad JSON Array format');
     });
   });
