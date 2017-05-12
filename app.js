@@ -58,7 +58,7 @@ router.route('/search')
 
 
 server.listen(port);
-console.log('server running at port: ', );
+console.log('server running at port: ');
 
 export default server;
 
