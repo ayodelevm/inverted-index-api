@@ -44,7 +44,7 @@
 
 * Run the app
   *  `npm start`
-  *  Running the command above will run the app at localhost://3000.
+  *  Running the command above will run the app at localhost:3000.
 
 ## Usage
 
