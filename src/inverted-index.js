@@ -216,7 +216,13 @@ export default class InvertedIndex {
  */
   validateFileContent(data, filename) {
     let hasErrors = false;
-    if (data.length > 0 && data.some(i =>
+    if (!filename.endsWith('.json')) {
+      this.errors
+        .push(new DataError('Invalid file', filename));
+      hasErrors = true;
+    }
+
+    if (!hasErrors && data.length > 0 && data.some(i =>
       (JSON.stringify(i)[0]) !== '{' && JSON
         .stringify(i)[JSON.stringify(i).length - 1] !== '}')) {
       this.errors
