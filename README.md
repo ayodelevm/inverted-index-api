@@ -28,19 +28,19 @@
 *  Clone this repository on that directory.
   *  Using SSH;
 
-    > `git clone git@github.com:ayodelevm/inverted-index-api.git`
+    > git clone git@github.com:ayodelevm/inverted-index-api.git
 
   *  Using HTTPS;
 
-    > `git clone https://github.com/ayodelevm/inverted-index-api.git`
+    > git clone https://github.com/ayodelevm/inverted-index-api.git
 
 *  Navigate to the repo's folder on your computer
   *  `cd inverted-index-api/`
 *  Install the app's backend dependencies. 
   *  `npm install`
 
-    >In order to use need to have **nodeJs** and **npm** installed on your system.
-    >In other to interact effectively with endpoints, install and use **Postman**
+    > In order to use need to have __nodeJs__ and **npm** installed on your system.
+    > In other to interact effectively with endpoints, install and use __Postman__
 
 * Run the app
   *  `npm start`
