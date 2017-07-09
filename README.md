@@ -37,12 +37,9 @@
 *  Navigate to the repo's folder on your computer
   *  `cd inverted-index-api/`
 *  Install the app's backend dependencies. 
-  *  `npm install`
-    
-    ```
+  *  `npm install` 
     * In order to use need to have __`nodeJs`__ and **`npm`** installed on your system.
     * In other to interact effectively with endpoints, install and use __`Postman`__
-    ```
 
 * Run the app
   *  `npm start`
