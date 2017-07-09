@@ -39,8 +39,8 @@
 *  Install the app's backend dependencies. 
   *  `npm install`
 
-    > In order to use need to have __`nodeJs`__ and **`npm`** installed on your system.
-    > In other to interact effectively with endpoints, install and use __`Postman`__
+    * In order to use need to have __`nodeJs`__ and **`npm`** installed on your system.
+    * In other to interact effectively with endpoints, install and use __`Postman`__
 
 * Run the app
   *  `npm start`
