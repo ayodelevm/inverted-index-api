@@ -28,11 +28,11 @@
 *  Clone this repository on that directory.
   *  Using SSH;
 
-    >`git clone git@github.com:ayodelevm/inverted-index-api.git`
+    > `git clone git@github.com:ayodelevm/inverted-index-api.git`
 
   *  Using HTTPS;
 
-    >`git clone https://github.com/ayodelevm/inverted-index-api.git`
+    > `git clone https://github.com/ayodelevm/inverted-index-api.git`
 
 *  Navigate to the repo's folder on your computer
   *  `cd inverted-index-api/`
